@@ -1,0 +1,73 @@
+en:
+  addressbook:
+    actions:
+      create: Create
+      save: Save
+      edit: Edit
+      delete: Delete
+      add: Add
+      search: Search
+    contact:
+      new_contact: New contact
+      query: Query
+      query_placeholder: Enter name, email or phone number
+      name: Name
+      photo: Photo
+      group: Group
+      company_address: Company, Address
+      contact_methods: Contact Methods
+      status: Status
+      created_at: Created at
+      delete_confirm: Are you sure?
+      no_contacts: No contacts.
+      first_name: First Name
+      last_name: Last Name
+      nickname: Nickname
+      gender: Gender
+      company: Company
+      homepage: Homepage
+      dob: Birthday
+      create_notice: Contact was saved successfully.
+      update_notice: Contact was updated successfully.
+      import_notice:
+        zero: There is no contact to import
+        one: Imported 1 contact successfully.
+        other: 'Imported %{count} contact successfully.'
+      invalid_vcard: Please select valid VCard file.
+      invalid_csv: Please select valid CSV file.
+      email: Email
+      preferred: Preferred
+      address: Address
+      line1: Line 1
+      line2: Line 2
+      line3: Line 3
+      zipcode: Zipcode
+      city: City
+      state: State
+      country: Country
+      add_email: Add email
+      remove_email: Remove email
+      add_address: Add address
+      remove_address: Remove address
+      add_phone: Add phone
+      remove_phone: Remove phone
+      phone: Phone
+      number: Number
+      phone_type: Phone type
+      total: Total
+      import_vcard: Import VCard
+      error_explanation:
+        one: '1 error prohibited this contact from being saved:'
+        other: '%{count} errors prohibited this contact from being saved:'
+    group:
+      name: Name
+      description: Description
+      contacts_count: Contacts
+      new_group: New group
+      no_groups: You have no groups yet.
+      create_notice: Group was saved successfully.
+      update_notice: Group was updated successfully.
+      delete_confirm: Are you sure?
+      error_explanation:
+        one: '1 error prohibited this group from being saved:'
+        other: '%{count} errors prohibited this group from being saved:'

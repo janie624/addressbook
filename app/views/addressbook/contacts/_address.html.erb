@@ -1,0 +1,35 @@
+<div class="nested-fields addressbook-contact-fields">
+  <%= hidden_field_tag "contact[addresses_attributes][][id]", address.id if address.id.present? %>
+  <%= hidden_field_tag "contact[addresses_attributes][][_destroy]", false, class: 'destroy_association_field' %>
+
+  <div class="field">
+    <%= label_tag :line1, t('addressbook.contact.line1') %>
+    <%= text_field_tag "contact[addresses_attributes][][line1]", address.line1 %>
+  </div>
+  <div class="field">
+    <%= label_tag :line2, t('addressbook.contact.line2') %>
+    <%= text_field_tag "contact[addresses_attributes][][line2]", address.line2 %>
+  </div>
+  <div class="field">
+    <%= label_tag :line3, t('addressbook.contact.line3') %>
+    <%= text_field_tag "contact[addresses_attributes][][line3]", address.line3 %>
+  </div>
+  <div class="field">
+    <%= label_tag :zipcode, t('addressbook.contact.zipcode') %>
+    <%= text_field_tag "contact[addresses_attributes][][zipcode]", address.zipcode %>
+  </div>
+  <div class="field">
+    <%= label_tag :city, t('addressbook.contact.city') %>
+    <%= text_field_tag "contact[addresses_attributes][][city]", address.city %>
+  </div>
+  <div class="field">
+    <%= label_tag :state, t('addressbook.contact.state') %>
+    <%= text_field_tag "contact[addresses_attributes][][state]", address.state %>
+  </div>
+  <div class="field">
+    <%= label_tag :country, t('addressbook.contact.country') %>
+    <%= text_field_tag "contact[addresses_attributes][][country]", address.country %>
+  </div>
+
+  <a class="remove_contact_associaton" href="#"><%= t('addressbook.contact.remove_address') %></a>
+</div>

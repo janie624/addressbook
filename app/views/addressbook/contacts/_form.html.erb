@@ -1,0 +1,97 @@
+<%= form_for @contact do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t('addressbook.contact.error_explanation', count: @contact.errors.count) %></h2>
+      <ul>
+        <% @contact.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :first_name, t('addressbook.contact.first_name') %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name, t('addressbook.contact.last_name') %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :nickname, t('addressbook.contact.nickname') %>
+    <%= f.text_field :nickname %>
+  </div>
+  <div class="field">
+    <%= f.label :gender, t('addressbook.contact.gender') %>
+    <%= f.select :gender, options_for_select(Addressbook::Contact::GENDER, f.object.gender), {} %>
+  </div>
+  <div class="field">
+    <%= f.label :company, t('addressbook.contact.company') %>
+    <%= f.text_field :company %>
+  </div>
+  <div class="field">
+    <%= f.label :photo, t('addressbook.contact.photo') %>
+    <%= f.file_field :photo %>
+  </div>
+  <div class="field">
+    <%= f.label :homepage, t('addressbook.contact.homepage') %>
+    <%= f.text_field :homepage %>
+  </div>
+  <div class="field">
+    <%= f.label :dob, t('addressbook.contact.dob') %>
+    <%= f.text_field :dob %>
+  </div>
+
+  <div class="field">
+    <%= f.label :group, t('addressbook.contact.group') %>
+    <%= f.select :group_ids, options_from_collection_for_select(current_addressbook_account.groups, "id", "name", selected: @contact.groups.map(&:id)), {}, { class: "groups_select form-control", multiple: true } %>
+    <%= link_to t('addressbook.group.new_group'), new_group_path %>
+  </div>
+
+  <div id="contact-emails">
+    <h4><%= t('addressbook.contact.email').pluralize %></h4>
+    <%= render partial: 'email', collection: @contact.emails %>
+    <a class="add-contact-association" href="#" data-template='<%= render "email", email: Addressbook::Contact::Email.new %>'><%= t('addressbook.contact.add_email') %></a>
+  </div>
+
+  <div id="contact-addresses">
+    <h4><%= t('addressbook.contact.address').pluralize %></h4>
+    <%= render partial: 'address', collection: @contact.addresses %>
+    <a class="add-contact-association" href="#" data-template='<%= render "address", address: Addressbook::Contact::Address.new %>'><%= t('addressbook.contact.add_address') %></a>
+  </div>
+
+  <div id="contact-phones">
+    <h4><%= t('addressbook.contact.phone').pluralize %></h4>
+    <%= render partial: 'phone', collection: @contact.phones %>
+    <a class="add-contact-association" href="#" data-template='<%= render "phone", phone: Addressbook::Contact::Phone.new %>'><%= t('addressbook.contact.add_phone') %></a>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit t('addressbook.actions.save') %>
+  </div>
+<% end %>
+
+<script>
+  var initNestedFields = function($el) {
+    $el.find('.remove_contact_associaton').click(function(e) {
+      e.preventDefault();
+      var $parent = $(this).parents('.nested-fields');
+      $parent.find('.destroy_association_field').val(true);
+      $parent.fadeOut();
+      return false;
+    });
+  }
+
+  $(document).ready(function() {
+    initNestedFields($('form'));
+
+    $('.add-contact-association').click(function(e) {
+      e.preventDefault();
+      var $newFields = $($(this).data('template'));
+      $newFields.insertBefore($(this));
+      initNestedFields($newFields);
+      return false;
+    });
+  })
+</script>

@@ -1,0 +1,29 @@
+<%= link_to t('addressbook.group.new_group'), new_group_path %>
+
+<% unless @groups.blank? %>
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <th><%= t('addressbook.group.name') %></th>
+      <th><%= t('addressbook.group.description') %></th>
+      <th><%= t('addressbook.group.contacts_count') %></th>
+      <th><%= t('addressbook.group.created_at') %></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr class="addressbook-group" data-id='<%= group.id %>'>
+          <td><%= group.name %></td>
+          <td><%= group.description %></td>
+          <td><%= group.contacts_count %></td>
+          <td><%= Time.parse(group.created_at) %></td>
+          <td>
+            <%= link_to t('addressbook.actions.edit'), edit_group_path(group.id) %> | 
+            <%= link_to t('addressbook.actions.delete'), group_path(group.id), method: :delete, remote: true, data: { confirm: t('addressbook.group.delete_confirm') } %>
+          </td>
+        </tr>
+     <%end%>
+    </tbody>
+  </table>
+<% else %>
+  <p><%= t('addressbook.group.no_groups') %></p>
+<% end %>

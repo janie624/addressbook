@@ -1,0 +1,19 @@
+<div class="nested-fields addressbook-contact-fields">
+  <%= hidden_field_tag "contact[phones_attributes][][id]", phone.id if phone.id.present? %>
+  <%= hidden_field_tag "contact[phones_attributes][][_destroy]", false, class: 'destroy_association_field' %>
+
+  <div class="field">
+    <%= label_tag :number, t('addressbook.contact.number') %>
+    <%= text_field_tag "contact[phones_attributes][][number]", phone.number %>
+  </div>
+  <div class="field">
+    <%= label_tag :phone_type, t('addressbook.contact.phone_type') %>
+    <%= select_tag "contact[phones_attributes][][phone_type]", options_for_select(Addressbook::Contact::Phone::TYPES, phone.phone_type) %>
+  </div>
+  <div class="field">
+    <%= label_tag :preferred, t('addressbook.contact.preferred') %>
+    <%= check_box_tag "contact[phones_attributes][][preferred]", true, phone.preferred  %>
+  </div>
+
+  <a class="remove_contact_associaton" href="#"><%= t('addressbook.contact.remove_phone') %></a>
+</div>

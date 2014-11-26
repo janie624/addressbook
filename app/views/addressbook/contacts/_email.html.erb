@@ -1,0 +1,15 @@
+<div class="nested-fields addressbook-contact-fields">
+  <%= hidden_field_tag "contact[emails_attributes][][id]", email.id if email.id.present? %>
+  <%= hidden_field_tag "contact[emails_attributes][][_destroy]", false, class: 'destroy_association_field' %>
+
+  <div class="field">
+    <%= label_tag :email, t('addressbook.contact.email') %>
+    <%= text_field_tag "contact[emails_attributes][][email]", email.email %>
+  </div>
+  <div class="field">
+    <%= label_tag :preferred, t('addressbook.contact.preferred') %>
+    <%= check_box_tag "contact[emails_attributes][][preferred]", true, email.preferred  %>
+  </div>
+
+  <a class="remove_contact_associaton" href="#"><%= t('addressbook.contact.remove_email') %></a>
+</div>

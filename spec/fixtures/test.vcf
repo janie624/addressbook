@@ -1,0 +1,23 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Apple Inc.//Mac OS X 10.9.4//EN
+N:Bierbrauer;Alexander;;;
+FN:Alexander Bierbrauer
+EMAIL;type=INTERNET;type=HOME;type=pref:abierbrauer@gmx.org
+EMAIL;type=INTERNET;type=HOME:ghostrifle@me.com
+item1.TEL;type=pref:01719927697
+item1.X-ABLabel:phone
+TEL;type=HOME;type=VOICE:49-19927697
+item2.ADR;type=HOME;type=pref:;;Junkersstr 32;Saarbrücken;;66117;Deutschland
+item2.X-ABADR:de
+item3.ADR;type=HOME:;;Lilienstr.1;Schwalbach;;66773;Deutschland
+item3.X-ABADR:de
+X-SOCIALPROFILE;type=gamecenter;x-user=ghostrifle;x-userid=G:183951842:http://link.gc.apple.com/player/G:183951842
+X-AIM;type=HOME;type=pref:ghostrifle@me.com
+X-JABBER;type=HOME;type=pref:abierbrauer@vdm-it.com
+IMPP;X-SERVICE-TYPE=AIM;type=HOME;type=pref:aim:ghostrifle@me.com
+IMPP;X-SERVICE-TYPE=Jabber;type=HOME:xmpp:abierbrauer@vdm-it.com
+PHOTO;
+UID:7ed567c8-6f67-4f1f-b7c3-1695bd15fe70
+X-ABUID:7ED567C8-6F67-4F1F-B7C3-1695BD15FE70:ABPerson
+END:VCARD

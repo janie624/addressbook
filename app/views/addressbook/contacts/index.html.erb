@@ -1,0 +1,115 @@
+<%= link_to t('addressbook.contact.new_contact'), new_contact_path %>
+<%= form_tag({ action: 'import_vcard' }, { class: 'import-form', multipart: true }) do %>
+  <input type="file" name="vcard" style="display: none;">
+  <%= link_to t('addressbook.contact.import_vcard'), '#', class: 'import-file' %>
+<% end %>
+<%= form_tag({ action: 'import_csv' }, { class: 'import-form', multipart: true }) do %>
+  <input type="file" name="csv" style="display: none;">
+  <%= link_to t('addressbook.contact.import_csv'), '#', class: 'import-file' %>
+<% end %>
+
+<p>
+  <%= form_tag contacts_path, method: :get, class: 'form-horizontal' do %>
+    <div class="field">
+      <%= label_tag :query, t('addressbook.contact.query') %>
+      <%= text_field_tag :query, params[:query], placeholder: t('addressbook.contact.query_placeholder') %>
+    </div>
+    <%= submit_tag t('addressbook.actions.search') %>
+  <% end %>
+</p>
+
+<% unless @contacts.blank? %>
+  <p><%= t('addressbook.contact.total') %>: <%= @contacts.total_count %></p>
+
+  <table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <th><%= t('addressbook.contact.photo') %></th>
+      <th><%= t('addressbook.contact.name') %></th>
+      <th><%= t('addressbook.contact.group') %></th>
+      <th><%= t('addressbook.contact.company_address') %></th>
+      <th><%= t('addressbook.contact.contact_methods') %></th>
+      <th><%= t('addressbook.contact.status') %></th>
+      <th><%= t('addressbook.contact.created_at') %></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr class="addressbook-contact" data-id='<%= contact.id %>'>
+          <td><%= image_tag contact.thumb_url || 'addressbook/default.png' %></td>
+          <td>
+            <%= [contact.first_name, contact.last_name].reject(&:blank?).join(' ') %>
+            <% unless contact.title.blank? %>
+              <br>
+              <%= contact.title %>
+            <% end %>
+            <% unless contact.nickname.blank? %>
+              <br>
+              <%= contact.nickname %>
+            <% end %>
+            <% unless contact.dob.blank? %>
+              <br>
+              <%= Time.parse(contact.dob).strftime('%m/%d/%Y') %>
+            <% end %>
+            <% unless contact.gender.blank? %>
+              <br>
+              <%= contact.gender %>
+            <% end %>
+          </td>
+          <td><%= contact.groups.map { |x| x.name }. join(', ') %></td>
+          <td>
+            <% unless contact.company.blank? %>
+              <%= contact.company %>
+              <br>
+            <% end %>
+            <% unless (address = contact.addresses.first).blank? %>
+              <%= [address.line1, address.line2, address.line3].reject(&:blank?).join(' ') %>
+              <br>
+              <%= [address.zipcode, address.city, address.state].reject(&:blank?).join(' ') %>
+              <br>
+              <%= address.country %>
+              <br>
+            <% end %>
+          </td>
+          <td>
+            <% contact.emails.each do |m| %>
+              <span class="glyphicon glyphicon-envelope"></span>
+              <%= m.email %>
+              <br>
+            <% end %>
+            <% contact.phones.each do |p| %>
+              <span class="glyphicon glyphicon-#{phone_icon_class(p.phone_type)}"></span>
+              <%= p.number %>
+              <br>
+            <% end %>
+            <% unless contact.homepage.blank? %>
+              <span class="glyphicon glyphicon-globe"></span>
+              <%= link_to contact.homepage.gsub(/http(s)?:\/\//, ''), contact.homepage, target: '_blank' %>
+            <% end %>
+          </td>
+          <td><%= contact.status %></td>
+          <td><%= Time.parse(contact.created_at) %></td>
+          <td>
+            <%= link_to t('addressbook.actions.edit'), edit_contact_path(contact.id) %> | 
+            <%= link_to t('addressbook.actions.delete'), contact_path(contact.id), method: :delete, remote: true, data: { confirm: t('addressbook.contact.delete_confirm') } %>
+          </td>
+        </tr>
+     <%end%>
+    </tbody>
+  </table>
+<% else %>
+  <p><%= t('addressbook.contact.no_contacts') %></p>
+<% end %>
+
+<%= paginate @contacts %>
+
+<script>
+  $('.import-file').click(function(e) {
+    e.preventDefault();
+    $(this).parents('form').find('input').click();
+    return false;
+  });
+
+  $('.import-form input').change(function(e) {
+    $(this).parents('form').submit();
+  });
+</script>

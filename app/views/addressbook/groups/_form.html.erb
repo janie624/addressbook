@@ -1,0 +1,25 @@
+<%= form_for @group do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= t('addressbook.group.error_explanation', count: @group.errors.count) %></h2>
+      <ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, t('addressbook.group.name') %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description, t('addressbook.group.description') %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit t('addressbook.actions.save') %>
+  </div>
+<% end %>

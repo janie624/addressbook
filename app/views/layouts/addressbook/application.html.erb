@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Addressbook</title>
+  <%= stylesheet_link_tag    "addressbook/application", :media => "all" %>
+  <%= javascript_include_tag "addressbook/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div id="addressbook_container">
+    <% unless flash.blank? %>
+      <% flash.each do |type, message| %>
+        <div class="alert alert-#{type}">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <%= yield %>
+  </div>
+
+</body>
+</html>
