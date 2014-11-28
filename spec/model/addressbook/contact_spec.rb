@@ -50,10 +50,25 @@ module Addressbook
       it { Addressbook::Contact.import_csv(@account, @upload_file).count.should eq 1 }
     end
 
-    describe "default attributes of nested resources" do
-      it { Addressbook::Contact::Email.new.attributes.should eq({ email: nil, preferred: false }) }
-      it { Addressbook::Contact::Address.new.attributes.should eq({ line1: nil, line1: nil, line2: nil, line3: nil, zipcode: nil, city: nil, state: nil, country: nil }) }
-      it { Addressbook::Contact::Phone.new.attributes.should eq({ number: nil, phone_type: nil, preferred: false }) }
+    describe "full_name" do
+      it { Addressbook::Contact.new(first_name: 'Test', last_name: 'User').full_name.should eq 'Test User' }
+      it { Addressbook::Contact.new(first_name: 'Test').full_name.should eq 'Test' }
+    end
+
+    describe "nested resources" do
+      context "email" do
+        it { Addressbook::Contact::Email.new.attributes.should eq({ email: nil, preferred: false }) }
+      end
+
+      context "address" do
+        it { Addressbook::Contact::Address.new.attributes.should eq({ line1: nil, line1: nil, line2: nil, line3: nil, zipcode: nil, city: nil, state: nil, country: nil }) }
+        it { Addressbook::Contact::Address.new(line1: 'Central Park', line2: 'Unit 24').full_address.should eq 'Central Park Unit 24' }
+        it { Addressbook::Contact::Address.new(zipcode: '68750', city: 'Berlin').location.should eq '68750 Berlin' }
+      end
+
+      context "phone" do
+        it { Addressbook::Contact::Phone.new.attributes.should eq({ number: nil, phone_type: nil, preferred: false }) }
+      end
     end
   end
 end

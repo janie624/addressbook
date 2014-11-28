@@ -11,12 +11,14 @@ module Addressbook
     def initialize(*)
       super
 
-      self.fog_credentials = {
-        provider:               'AWS',
-        aws_access_key_id:      AWS_CONFIG['access_key_id'],
-        aws_secret_access_key:  AWS_CONFIG['secret_access_key'],
-      }
-      self.fog_directory = AWS_CONFIG['bucket']
+      unless Rails.env.test?
+        self.fog_credentials = {
+          provider:               'AWS',
+          aws_access_key_id:      AWS_CONFIG['access_key_id'],
+          aws_secret_access_key:  AWS_CONFIG['secret_access_key'],
+        }
+        self.fog_directory = AWS_CONFIG['bucket']
+      end
     end
  
     def store_dir
