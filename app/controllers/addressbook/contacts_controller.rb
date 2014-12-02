@@ -77,7 +77,7 @@ module Addressbook
     end
 
     def store_photo
-      return unless params[:contact][:photo]
+      return unless params[:contact] && params[:contact][:photo]
       @contact.token = SecureRandom.urlsafe_base64 if @contact.token.blank?
       @contact.photo = params[:contact][:photo]
       @contact.store_photo!
