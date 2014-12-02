@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'carrierwave', '~> 0.10', '>= 0.10.0'
   s.add_dependency 'fog', '~> 1.23', '>= 1.23.0'
   s.add_dependency 'mini_magick', '~> 3.7', '>= 3.7.0'
+  s.add_dependency 'kaminari', '~> 0.15', '>= 0.15.1'
   s.add_development_dependency "sqlite3", '~> 1.3', '>= 1.3.9'
   s.add_development_dependency "factory_girl_rails", '~> 4.4', '>= 4.4.1'
   s.add_development_dependency 'ffaker', '~> 1.24.0', '>= 1.24.0'

@@ -12,5 +12,3 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
-
-gem 'kaminari',     '0.15.1'

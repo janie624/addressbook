@@ -42,6 +42,10 @@ module Addressbook
       [first_name, last_name].reject(&:blank?).join(' ')
     end
 
+    def active?
+      status == 'active'
+    end
+
     schema do
       attribute 'first_name',   :string
       attribute 'last_name',    :string

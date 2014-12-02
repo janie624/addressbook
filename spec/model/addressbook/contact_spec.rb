@@ -55,6 +55,11 @@ module Addressbook
       it { Addressbook::Contact.new(first_name: 'Test').full_name.should eq 'Test' }
     end
 
+    describe "active?" do
+      it { Addressbook::Contact.new(status: 'active').active?.should eq true }
+      it { Addressbook::Contact.new(status: 'inactive').active?.should eq true }
+    end
+
     describe "nested resources" do
       context "email" do
         it { Addressbook::Contact::Email.new.attributes.should eq({ email: nil, preferred: false }) }
