@@ -12,6 +12,7 @@ module Addressbook
     self.site = "http://localhost:3001/api/v1/"
     self.user = "addressbook"
     self.password = "defaultpw"
+    self.timeout = 180
 
     def self.headers
       new_headers = static_headers.clone

@@ -15,7 +15,7 @@ require "addressbook/account"
 
 module Addressbook
 
-  mattr_accessor :user_class
+  mattr_accessor :user_class, :aws_config
 
   def self.configure &block
     yield

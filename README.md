@@ -27,7 +27,7 @@ Set addressbook owner class name and addressbook cloud server site url in config
 Addressbook.user_class = 'User'
 Addressbook::Resource.site = 'http://localhost:3001/api/v1/'
 
-AWS_CONFIG = Addressbook::Contact.get :s3_credential rescue {} unless Rails.env.test?
+Addressbook.aws_config = Addressbook::Contact.get :s3_credential rescue {} unless Rails.env.test?
 ```
 
 Add this line to addressbook owner model.
