@@ -57,7 +57,7 @@ module Addressbook
 
     describe "active?" do
       it { Addressbook::Contact.new(status: 'active').active?.should eq true }
-      it { Addressbook::Contact.new(status: 'inactive').active?.should eq true }
+      it { Addressbook::Contact.new(status: 'inactive').active?.should eq false }
     end
 
     describe "nested resources" do
