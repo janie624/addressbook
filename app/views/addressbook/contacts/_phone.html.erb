@@ -12,7 +12,7 @@
   </div>
   <div class="field">
     <%= label_tag :preferred, t('addressbook.contact.preferred') %>
-    <%= check_box_tag "contact[phones_attributes][][preferred]", true, phone.preferred  %>
+    <%= check_box_tag "contact[phones_attributes][][preferred]", true, (phone.try(:preferred) || false)  %>
   </div>
 
   <a class="remove_contact_associaton" href="#"><%= t('addressbook.contact.remove_phone') %></a>

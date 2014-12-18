@@ -45,25 +45,25 @@
 
   <div class="field">
     <%= f.label :group, t('addressbook.contact.group') %>
-    <%= f.select :group_ids, options_from_collection_for_select(current_addressbook_account.groups, "id", "name", selected: @contact.groups.map(&:id)), {}, { class: "groups_select form-control", multiple: true } %>
+    <%= f.select :group_ids, options_from_collection_for_select(current_addressbook_account.groups, "id", "name", selected: (@contact.groups.map(&:id) rescue [])), {}, { class: "groups_select form-control", multiple: true } %>
     <%= link_to t('addressbook.group.new_group'), new_group_path %>
   </div>
 
   <div id="contact-emails">
     <h4><%= t('addressbook.contact.email').pluralize %></h4>
-    <%= render partial: 'email', collection: @contact.emails %>
+    <%= render partial: 'email', collection: @contact.try(:emails) || @contact.try(:emails_attributes) %>
     <a class="add-contact-association" href="#" data-template='<%= render "email", email: Addressbook::Contact::Email.new %>'><%= t('addressbook.contact.add_email') %></a>
   </div>
 
   <div id="contact-addresses">
     <h4><%= t('addressbook.contact.address').pluralize %></h4>
-    <%= render partial: 'address', collection: @contact.addresses %>
+    <%= render partial: 'address', collection: @contact.try(:addresses) || @contact.try(:addresses_attributes) %>
     <a class="add-contact-association" href="#" data-template='<%= render "address", address: Addressbook::Contact::Address.new %>'><%= t('addressbook.contact.add_address') %></a>
   </div>
 
   <div id="contact-phones">
     <h4><%= t('addressbook.contact.phone').pluralize %></h4>
-    <%= render partial: 'phone', collection: @contact.phones %>
+    <%= render partial: 'phone', collection: @contact.try(:phones) || @contact.try(:phones_attributes) %>
     <a class="add-contact-association" href="#" data-template='<%= render "phone", phone: Addressbook::Contact::Phone.new %>'><%= t('addressbook.contact.add_phone') %></a>
   </div>
 
